@@ -17,4 +17,5 @@ Requirements:
 ```
 
 Example:
-![woodpycker demo screenshot](https://dl-web.dropbox.com/get/Public/CapturFiles-201412349_151275.png?_subject_uid=865084&w=AADZismsKGWwvUgIkclZFIlBl-sw_5PCn-octa3DSAzguQ "woodpycker demo screenshot")
+
+![woodpycker demo screenshot](https://cloud.githubusercontent.com/assets/199887/5436457/2a6142bc-846f-11e4-81b0-0e6a9c41bb06.png "woodpycker demo screenshot")
