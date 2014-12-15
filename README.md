@@ -11,10 +11,11 @@ Requirements:
  * [browsermob-proxy-py](https://github.com/AutomatedTester/browsermob-proxy-py)
  * colorama 0.3.2 and above
 
- How to run:
+How to run:
 ```bash
 # python woodpycker.py <page_url>
 ```
+*Note:* I've installed BrowserMob Proxy to /usr/local/opt/browsermobproxy/. You can install it to this location or change browsermobproxy_path in code.
 
 Example:
 
