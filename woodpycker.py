@@ -14,6 +14,7 @@ def show_status_codes(har,allowed_domain):
 		domain = urlparse(entry['request']['url'])
 		domain = domain.netloc
 		if domain.find(allowed_domain) != -1:
+			status = Style.BRIGHT + str(entry['response']['status']) + " - " + entry['response']['statusText'] + Style.RESET_ALL
 			if entry['response']['status'] >= 200 and entry['response']['status'] < 300:
 				status = Fore.GREEN + str(entry['response']['status']) + " - " + entry['response']['statusText'] + Fore.RESET
 			if entry['response']['status'] >= 400 and entry['response']['status'] < 500:
