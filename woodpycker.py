@@ -2,6 +2,7 @@
 #-*- coding: utf-8 -*-
 
 import sys,os
+import json
 from urlparse import urlparse
 from selenium import webdriver
 from browsermobproxy import Server
@@ -30,6 +31,11 @@ def main():
 	    print "You must specify page URL!"
 	    sys.exit()
 
+	if len(sys.argv) == 3:
+		cookies_file = sys.argv[2]
+	else:
+		cookies_file = ""
+
 	allowed_domain = urlparse(start_url).netloc
 
 	browsermobproxy_path = "/usr/local/opt/browsermobproxy/bin/browsermob-proxy"
@@ -48,6 +54,13 @@ def main():
 	driver = webdriver.Firefox(firefox_profile=profile)
 
 	driver.get(start_url)
+
+	if cookies_file != "":
+		with open(cookies_file, 'rb') as fp:
+		    cookies = json.load(fp)
+		for cookie in cookies:
+			driver.add_cookie(cookie)
+		driver.refresh()
 
 	links = driver.find_elements_by_tag_name('a')
 	lenl = len(links)

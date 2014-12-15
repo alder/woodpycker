@@ -15,6 +15,11 @@ How to run:
 ```bash
 # python woodpycker.py <page_url>
 ```
+or
+```bash
+# python woodpycker.py <page_url> <cookies_file.json>
+```
+
 *Note:* I've installed BrowserMob Proxy to /usr/local/opt/browsermobproxy/. You can install it to this location or change browsermobproxy_path in code.
 
 Example:
