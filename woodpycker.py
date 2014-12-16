@@ -32,10 +32,15 @@ def main():
 	    print "You must specify page URL!"
 	    sys.exit()
 
-	if len(sys.argv) == 3:
+	if len(sys.argv) >= 3:
 		cookies_file = sys.argv[2]
 	else:
 		cookies_file = ""
+
+	if len(sys.argv) == 4:
+		webdriver_type = sys.argv[3]
+	else:
+		webdriver_type = "firefox"
 
 	allowed_domain = urlparse(start_url).netloc
 
@@ -43,16 +48,24 @@ def main():
 
 	options = {
 		'port': 9090,
-
 	}
 
 	server = Server(browsermobproxy_path,options)
 	server.start()
 	proxy = server.create_proxy()
 
-	profile  = webdriver.FirefoxProfile()
-	profile.set_proxy(proxy.selenium_proxy())
-	driver = webdriver.Firefox(firefox_profile=profile)
+	if webdriver_type ==  "firefox":
+		profile  = webdriver.FirefoxProfile()
+		profile.set_proxy(proxy.selenium_proxy())
+		driver = webdriver.Firefox(firefox_profile=profile)
+	elif webdriver_type == "phantomjs":
+		service_args = ['--proxy=localhost:9091','--proxy-type=http',]
+		driver = webdriver.PhantomJS(service_args=service_args)
+		driver.set_window_size(1440, 1024)
+	else:
+		profile  = webdriver.FirefoxProfile()
+		profile.set_proxy(proxy.selenium_proxy())
+		driver = webdriver.Firefox(firefox_profile=profile)
 
 	driver.get(start_url)
 
