@@ -10,15 +10,17 @@ Requirements:
  * [BrowserMob Proxy](http://bmp.lightbody.net/)
  * [browsermob-proxy-py](https://github.com/AutomatedTester/browsermob-proxy-py)
  * colorama 0.3.2 and above
+ * [PhantomJS](http://phantomjs.org/)
 
 How to run:
 ```bash
-# python woodpycker.py <page_url>
+# python woodpycker.py -u <page_url>
 ```
-or
+or run
 ```bash
-# python woodpycker.py <page_url> <cookies_file.json>
+# python woodpycker.py -h
 ```
+for list of all parameters.
 
 *Note:* I've installed BrowserMob Proxy to /usr/local/opt/browsermobproxy/. You can install it to this location or change browsermobproxy_path in code.
 

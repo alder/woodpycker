@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 #-*- coding: utf-8 -*-
 
-import sys,os
+import sys
+import argparse
 import json
 from urlparse import urlparse
 from selenium import webdriver
@@ -24,23 +25,18 @@ def show_status_codes(har,allowed_domain):
 			print "-- %s [%s]" % (entry['request']['url'],status)
 
 
-def main():
+def main(argv):
 	init()
-	if len(sys.argv) >= 2:
-	    start_url = sys.argv[1]
-	else:
-	    print "You must specify page URL!"
-	    sys.exit()
 
-	if len(sys.argv) >= 3:
-		cookies_file = sys.argv[2]
-	else:
-		cookies_file = ""
-
-	if len(sys.argv) == 4:
-		webdriver_type = sys.argv[3]
-	else:
-		webdriver_type = "firefox"
+	parser = argparse.ArgumentParser()
+	parser.add_argument('-u', action='store', dest='start_url', help='Set page URL', required=True)
+	parser.add_argument('-c', action='store', dest='cookies_file', help='JSON file with cookies', required=False)
+	parser.add_argument('-w', action='store', dest='webdriver_type', help='Set WebDriver type (firefox or phantomjs, firebox by default)', default="firefox", required=False)
+	results = parser.parse_args()
+	
+	start_url = results.start_url
+	cookies_file = results.cookies_file
+	webdriver_type = results.webdriver_type
 
 	allowed_domain = urlparse(start_url).netloc
 
@@ -69,7 +65,7 @@ def main():
 
 	driver.get(start_url)
 
-	if cookies_file != "":
+	if not cookies_file is None:
 		with open(cookies_file, 'rb') as fp:
 		    cookies = json.load(fp)
 		for cookie in cookies:
@@ -95,4 +91,4 @@ def main():
 	server.stop()
 
 if __name__ == '__main__':
-	main()
+	main(sys.argv[1:])
