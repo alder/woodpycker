@@ -50,11 +50,7 @@ def main(argv):
 	server.start()
 	proxy = server.create_proxy()
 
-	if webdriver_type ==  "firefox":
-		profile  = webdriver.FirefoxProfile()
-		profile.set_proxy(proxy.selenium_proxy())
-		driver = webdriver.Firefox(firefox_profile=profile)
-	elif webdriver_type == "phantomjs":
+	if webdriver_type == "phantomjs":
 		service_args = ['--proxy=localhost:9091','--proxy-type=http',]
 		driver = webdriver.PhantomJS(service_args=service_args)
 		driver.set_window_size(1440, 1024)
