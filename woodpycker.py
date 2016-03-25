@@ -59,6 +59,7 @@ def main(argv):
 		profile.set_proxy(proxy.selenium_proxy())
 		driver = webdriver.Firefox(firefox_profile=profile)
 
+	proxy.new_har('woodpycker', options={'captureHeaders': True, 'captureContent': True})
 	driver.get(start_url)
 
 	if not cookies_file is None:
@@ -75,7 +76,6 @@ def main(argv):
 			url = links[i].get_attribute('href')
 			text = links[i].get_attribute('text')
 			if url.find(allowed_domain) != -1:
-				proxy.new_har('demo')
 				links[i].click()
 				print "%s Clicked on the link '%s' with HREF '%s'" % (Fore.BLUE+"*"+Fore.RESET,Style.BRIGHT+text+Style.RESET_ALL,Style.BRIGHT+url+Style.RESET_ALL)
 				show_status_codes(proxy.har,allowed_domain)
