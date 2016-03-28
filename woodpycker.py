@@ -4,10 +4,21 @@
 import sys
 import argparse
 import json
+import os
 from urlparse import urlparse
 from selenium import webdriver
 from browsermobproxy import Server
 from colorama import init, Fore, Style
+
+
+def get_browsermobproxy_path():
+	if os.getenv('BMPATH') != None:
+		if os.path.exists(os.environ['BMPATH']):
+			return os.environ['BMPATH']
+		else:
+			return "/usr/local/opt/browsermobproxy/bin/browsermob-proxy"
+	else:
+		return "/usr/local/opt/browsermobproxy/bin/browsermob-proxy"
 
 
 def show_status_codes(har,allowed_domain):
@@ -40,7 +51,7 @@ def main(argv):
 
 	allowed_domain = urlparse(start_url).netloc
 
-	browsermobproxy_path = "/usr/local/opt/browsermobproxy/bin/browsermob-proxy"
+	browsermobproxy_path = get_browsermobproxy_path()
 
 	options = {
 		'port': 9090,

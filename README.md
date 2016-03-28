@@ -22,7 +22,11 @@ or run
 ```
 for list of all parameters.
 
-*Note:* I've installed BrowserMob Proxy to /usr/local/opt/browsermobproxy/. You can install it to this location or change browsermobproxy_path in code.
+**Note:** You can set environment variable BMPATH to specify the BrowserMob Proxy location. For example:
+```bash
+# env BMPATH=/opt/browsermob-proxy/bin/browsermob-proxy python woodpycker.py -u <page_url>
+```
+If environment variable not specified the default location '/usr/local/opt/browsermobproxy/bin/browsermob-proxy' will be used.
 
 Example:
 
